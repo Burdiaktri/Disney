@@ -1,16 +1,25 @@
-{ "type":"module",
+{
+  "type": "module",
   "name": "alkemy",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "nodemon": "^2.0.14"
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.14",
+    "pg": "^8.7.1",
+    "sequelize": "^6.12.4",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "nodemon index.js"
   },
   "author": "",
   "license": "ISC"
