@@ -1,4 +1,5 @@
 import { Router } from "express"
+import verifyToken from '../controllers/verifyToken.js'
 
 import {
 	getMovies,
@@ -10,7 +11,7 @@ import {
 const moviesRouter = Router()
 
 moviesRouter
-	.get("/", getMovies)
+	.get("/", verifyToken, getMovies)
 	.post("/", createMovies)
 	.put("/:id", updateMovies)
 	.delete("/:id", deleteMovies)

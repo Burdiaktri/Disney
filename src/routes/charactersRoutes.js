@@ -1,4 +1,5 @@
 import { Router } from "express"
+import verifyToken from '../controllers/verifyToken.js'
 
 import {
 	getCharacters,
@@ -10,7 +11,7 @@ import {
 const charactersRouter = Router()
 
 charactersRouter
-	.get('/', getCharacters)
+	.get('/', verifyToken, getCharacters)
 	.post('/', createCharacters)
 	.put('/:id', updateCharacters)
 	.delete('/:id', deleteCharacters)

@@ -1,7 +1,7 @@
 
 import {Sequelize} from 'sequelize'
 import {sequelize} from '../../database/db.js'
-import bcrypt from 'bcryptjs'
+
 
 const dbUser = sequelize.define('users', {
     id: {
@@ -19,16 +19,7 @@ const dbUser = sequelize.define('users', {
         type: Sequelize.TEXT
     },
 },
-{
-    instanceMethods: {
-        encryptPassword(password) {
-            return bcrypt.hash(password, bcrypt.genSaltSync(8))
-        },
-        validPassword(password) {
-            return bcrypt.compare(password, this.password)
-        }
-    }
-    },{
+ {
     timestamps: false
 })
 
