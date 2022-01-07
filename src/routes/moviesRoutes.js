@@ -3,6 +3,8 @@ import verifyToken from '../controllers/verifyToken.js'
 
 import {
 	getMovies,
+	getOneMovie,
+	getMovieByCharacter,
 	createMovies,
 	updateMovies,
 	deleteMovies
@@ -11,7 +13,9 @@ import {
 const moviesRouter = Router()
 
 moviesRouter
-	.get("/", verifyToken, getMovies)
+	.get("/", /*verifyToken*/ getMovies)
+	.get('/:id', getOneMovie)
+	.get('/character/:charactersid', getMovieByCharacter)
 	.post("/", createMovies)
 	.put("/:id", updateMovies)
 	.delete("/:id", deleteMovies)

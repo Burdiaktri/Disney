@@ -1,11 +1,13 @@
 
 import {Sequelize} from 'sequelize'
 import { sequelize } from '../../database/db.js'
+import dbCharacters from './characters.js'
 
 const dbMovies = sequelize.define('movies', {
     id: {
         type: Sequelize.INTEGER,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     image: {
         type: Sequelize.TEXT
@@ -19,7 +21,7 @@ const dbMovies = sequelize.define('movies', {
     rating: {
         type: Sequelize.INTEGER
     },
-    charactersId: {
+    charactersid: {
         type: Sequelize.INTEGER
     }, 
     
@@ -27,5 +29,6 @@ const dbMovies = sequelize.define('movies', {
     timestamps: false
 })
 
-
+dbMovies.hasMany(dbCharacters, {foreignKey: 'moviesid', sourceKey: 'id'})
+dbCharacters.belongsTo(dbMovies, {foreignKey: 'moviesid', sourceKey: 'id'})
 export default dbMovies

@@ -1,82 +1,116 @@
-import {Movies} from '../models/disney/movies.js'
-import Response from '../models/server/response.js'
-import dbMovies from '../models/persistence/movies.js'
-
+import Response from "../models/server/response.js";
+import dbMovies from "../models/persistence/movies.js";
 
 export const getMovies = async (req, res, next) => {
-	const {id} = req.params;
-	try {
-		let response = id
-			? await dbMovies.findById('movies', id)
-			: await dbMovies.findAll('movies');
-		!response && id
-			? res
-					.status(404)
-					.send(new Response(response, 'Movie not found', 404))
-			: res.send(new Response(response));
-	} catch (error) {
-		next(error);
+  try {
+    const movies = await dbMovies.findAll({
+      attributes: ["id", "image", "title", "date", "rating", "charactersid"],
+    })
+    !movies
+      ? res.status(404).send(new Response("Movie not found", 404))
+      : res.send(new Response(movies))
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const getOneMovie = async (req, res, next) => {
+	const {id} = req.params
+	try{
+		const movie = await dbMovies.findOne({
+			where: {
+				id
+			}
+		})
+		!movie
+      ? res.status(404).send(new Response("Movie not found", 404))
+      : res.send(new Response(movie))
+	}catch (error){
+		next(error)
 	}
-};
+}
+
+export const getMovieByCharacter = async (req, res, next) => {
+const {charactersid} = req.params
+try {
+	const movies = await dbMovies.findAll({
+		where: {
+			charactersid
+		}
+	})
+	!movies
+      ? res.status(404).send(new Response("Movies not found", 404))
+      : res.send(new Response(movies))
+
+}catch (error){
+	next(error)
+}
+}
 
 export const createMovies = async (req, res, next) => {
-	try {
-		const {title, image, date, rating, characters} = req.body
+  try {
+    const { title, image, date, rating, charactersid } = req.body;
 
-		const newMovie = new Movies (
-			title,
-			image,
-			date,
-			rating,
-			characters,
-		)
+    const newMovie = await dbMovies.create({
+      title,
+      image,
+      date,
+      rating,
+      charactersid,
+    });
 
-		let response = await dbMovies.create('movies', newMovie);
-		res.send(new Response(response));
-	} catch (error) {
-		console.log(error)
-		next(error);
-	}
+    res.send(new Response(newMovie));
+  } catch (error) {
+
+    next(error)
+  }
 };
 
 export const updateMovies = async (req, res, next) => {
-	const {id} = req.params;
-	try {
-		const properties = [
-			'id',
-			'title',
-			'image',
-			'date',
-			'rating',
-			'characters'
-		]
-		let items = {}
-		for (const key in req.body) {
-			if (properties.includes(key)) {
-				items[key] = req.body[key]
-			}
-		}
-		let response = await dbMovies.update('movies', id, items);
-		response
-			? res.send(new Response(response))
-			: res
-					.status(404)
-					.send(new Response(response, 'Movie not found', 404));
-	} catch (error) {
-		next(error);
-	}
+  const { id } = req.params;
+  const { image, title, date, rating, charactersid } = req.body;
+  try {
+    const movie = await dbMovies.findOne({
+      attributes: ["id", "image", "title", "date", "rating", "charactersid"],
+      where: {
+        id,
+      },
+    });
+    const updatedMovie = await dbMovies.update(
+      {
+        image,
+        title,
+        date,
+        rating,
+        charactersid,
+      },
+      {
+        where: {
+          id,
+        },
+      }
+    );
+
+    updatedMovie
+      ? res.send(new Response(updatedMovie))
+      : res.status(404).send(new Response("Movie not found", 404))
+  } catch (error) {
+    next(error)
+  }
 };
 
 export const deleteMovies = async (req, res, next) => {
-	const {id} = req.params
-	try {
-		let response = await dbMovies.remove('movies', id);
-		response
-			? res.send(new Response(response))
-			: res
-					.status(404)
-					.send(new Response(response, 'Producto no encontrado', 404));
-	} catch (error) {
-		next(error);
-	}
+  const { id } = req.params;
+  try {
+    const movies = await dbMovies.destroy({
+      where: {
+        id,
+      },
+    })
+    movies
+      ? res.send(new Response(movies))
+      : res.status(404).send(new Response("Movie not found", 404))
+  } catch (error) {
+    next(error)
+  }
 };

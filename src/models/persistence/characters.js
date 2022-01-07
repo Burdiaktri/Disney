@@ -1,4 +1,3 @@
-
 import {Sequelize} from 'sequelize'
 import {sequelize} from '../../database/db.js'
 import dbMovies from './movies.js'
@@ -6,7 +5,8 @@ import dbMovies from './movies.js'
 const dbCharacters = sequelize.define('characters', {
     id: {
         type: Sequelize.INTEGER,
-        primaryKey: true
+        primaryKey: true,
+        autoIncrement: true
     },
     image: {
         type: Sequelize.TEXT
@@ -20,13 +20,14 @@ const dbCharacters = sequelize.define('characters', {
     story: {
         type: Sequelize.TEXT
     },
-    movies: {
-        type: Sequelize.TEXT
+    moviesid: {
+        type: Sequelize.INTEGER
     },  
 },{
     timestamps: false
 })
 
-// dbCharacters.hasMany(dbMovies, {foreignKey: 'charactersId', sourceKey: 'id'})
-// dbMovies.belongsTo(dbCharacters, {foreignKey: 'charactersId', sourceKey: 'id'})
+// dbCharacters.hasMany(dbMovies, {foreignKey: 'charactersid', sourceKey: 'id'})
+// dbMovies.belongsTo(dbCharacters, {foreignKey: 'charactersid', sourceKey: 'id'})
+
 export default dbCharacters
