@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import dotenv from 'dotenv'
+import * as dotenv from 'dotenv';
 dotenv.config()
 
 const verifyToken = (req, res, next) => {
@@ -10,7 +10,7 @@ const verifyToken = (req, res, next) => {
             message: 'no token provided'
         })
     }
-    const decoded = jwt.verify(token, process.env.SECRET)
+     const decoded = jwt.verify(token, `${process.env.SECRET}`)
      req.userId = decoded.id
      next()
 }

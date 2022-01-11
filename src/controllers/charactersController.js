@@ -85,7 +85,7 @@ export const createCharacters = async (req, res, next) => {
 
 export const updateCharacters = async (req, res, next) => {
   const { id } = req.params
-  const { image, name, age, story, movies } = req.body
+  const { image, name, age, story, movieid } = req.body
   try {
 	const characters = await dbCharacters.findAll({
 		attributes:["id", "image", "name", "age", "story", "moviesid"],

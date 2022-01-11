@@ -21,7 +21,7 @@ app.get('/', (_, res) => {
 
 app.use("/movies", moviesRouter)
 app.use('/characters', charactersRouter)
-app.use('/auth', UserRouter )
+app.use('/jwt', UserRouter )
 app.use(errorHandlerMiddleware)
 
 export default app
