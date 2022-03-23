@@ -14,13 +14,13 @@ import {
 const charactersRouter = Router()
 
 charactersRouter
-	.get('/', /*verifyToken,*/ getCharacters)
-	.get('/:id', /*verifyToken,*/  getOneCharacter)
-	.get('/name/:name', /*verifyToken,*/ getCharacterByName)
-	.get('/age/:age',/*verifyToken,*/ getCharacterByAge)
-	.post('/', /*verifyToken,*/ createCharacters)
-	.put('/:id', /*verifyToken,*/ updateCharacters)
-	.delete('/:id',/*verifyToken,*/ deleteCharacters)
+	.get('/', getCharacters)
+	.get('/:id',  getOneCharacter)
+	.get('/name/:name', getCharacterByName)
+	.get('/age/:age', getCharacterByAge)
+	.post('/', verifyToken, createCharacters)
+	.put('/:id', verifyToken, updateCharacters)
+	.delete('/:id', verifyToken, deleteCharacters)
 
 
 export default charactersRouter

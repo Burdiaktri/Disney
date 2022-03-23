@@ -7,6 +7,6 @@ const UserRouter = Router()
 UserRouter  
         .post('/signup',  signUp)
         .post('/login', logIn)
-        .get('/auth', verifyToken, auth)
+        .get('/auth', auth)
 
 export default UserRouter

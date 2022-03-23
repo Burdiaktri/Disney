@@ -13,12 +13,12 @@ import {
 const moviesRouter = Router()
 
 moviesRouter
-	.get("/", /*verifyToken,*/ getMovies)
-	.get('/:id', /*verifyToken,*/ getOneMovie)
-	.get('/character/:charactersid',/*verifyToken,*/ getMovieByCharacter)
-	.post("/", /*verifyToken,*/ createMovies)
-	.put("/:id",/*verifyToken,*/  updateMovies)
-	.delete("/:id",/*verifyToken,*/ deleteMovies)
+	.get("/", getMovies)
+	.get('/:id', getOneMovie)
+	.get('/character/:charactersid', getMovieByCharacter)
+	.post("/", verifyToken, createMovies)
+	.put("/:id",verifyToken,  updateMovies)
+	.delete("/:id",verifyToken, deleteMovies)
 
 
 export default moviesRouter

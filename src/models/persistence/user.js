@@ -3,6 +3,7 @@ import {Sequelize} from 'sequelize'
 import {sequelize} from '../../database/db.js'
 
 
+
 const dbUser = sequelize.define('users', {
     id: {
         type: Sequelize.INTEGER,
@@ -16,8 +17,9 @@ const dbUser = sequelize.define('users', {
         type: Sequelize.TEXT
     },
     password: {
-        type: Sequelize.TEXT
-    },
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
 },
  {
     timestamps: false
