@@ -27,7 +27,5 @@ const dbCharacters = sequelize.define('characters', {
     timestamps: false
 })
 
-// dbCharacters.hasMany(dbMovies, {foreignKey: 'charactersid', sourceKey: 'id'})
-// dbMovies.belongsTo(dbCharacters, {foreignKey: 'charactersid', sourceKey: 'id'})
 
 export default dbCharacters

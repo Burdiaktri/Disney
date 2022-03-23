@@ -92,7 +92,7 @@ export const updateMovies = async (req, res, next) => {
     );
 
     updatedMovie
-      ? res.send(new Response(updatedMovie))
+      ? res.send(new Response(movie))
       : res.status(404).send(new Response("Movie not found", 404))
   } catch (error) {
     next(error)
