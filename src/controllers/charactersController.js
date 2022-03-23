@@ -28,39 +28,6 @@ export const getOneCharacter = async (req, res, next) => {
   }
 }
 
-export const getCharacterByName = async (req, res, next) => {
-  const { name } = req.params
-  try {
-    const character = await dbCharacters.findOne({
-      where: {
-        name
-      },
-    })
-    !character
-      ? res.status(404).send(new Response("character not found", 404))
-      : res.send(new Response(character))
-  } catch (error) {
-    next(error)
-  }
-}
-
-export const getCharacterByAge= async (req, res, next) => {
-  const { age } = req.params
-  try {
-    const character = await dbCharacters.findOne({
-      where: {
-        age
-      },
-    })
-    !character
-      ? res.status(404).send(new Response("character not found", 404))
-      : res.send(new Response(character))
-  } catch (error) {
-    next(error)
-  }
-}
-
-
 export const createCharacters = async (req, res, next) => {
   const { image, name, age, story, moviesid } = req.body
 
@@ -85,7 +52,7 @@ export const createCharacters = async (req, res, next) => {
 
 export const updateCharacters = async (req, res, next) => {
   const { id } = req.params
-  const { image, name, age, story, movieid } = req.body
+  const { image, name, age, story, moviesid } = req.body
   try {
 	const characters = await dbCharacters.findAll({
 		attributes:["id", "image", "name", "age", "story", "moviesid"],
