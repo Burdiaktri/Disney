@@ -29,15 +29,14 @@ export const getOneCharacter = async (req, res, next) => {
 }
 
 export const createCharacters = async (req, res, next) => {
-  const { image, name, age, story, moviesid } = req.body
+  const { image, name, age, story} = req.body
 
   try {
     let newCharacter = await dbCharacters.create({
       image,
       name,
       age,
-      story,
-      moviesid,
+      story
     });
 
     if (newCharacter) {
@@ -55,7 +54,7 @@ export const updateCharacters = async (req, res, next) => {
   const { image, name, age, story, moviesid } = req.body
   try {
 	const characters = await dbCharacters.findAll({
-		attributes:["id", "image", "name", "age", "story", "moviesid"],
+		attributes:["id", "image", "name", "age", "story"],
 		where: {
 			id
 		}
@@ -67,7 +66,6 @@ export const updateCharacters = async (req, res, next) => {
 				name,
 				age,
 				story,
-				moviesid
 			})
 		})
 	}

@@ -19,10 +19,7 @@ const dbCharacters = sequelize.define('characters', {
     },
     story: {
         type: Sequelize.TEXT
-    },
-    moviesid: {
-        type: Sequelize.INTEGER
-    },  
+    }, 
 },{
     timestamps: false
 })

@@ -1,5 +1,6 @@
 import { Router } from "express"
-import verifyToken from '../controllers/verifyToken.js'
+import verifyToken from '../middlewares/verifyToken.js'
+import validatePostMovie from "../middlewares/validator/movies.js"
 
 import {
 	getMovies,
@@ -16,7 +17,7 @@ moviesRouter
 	.get("/", getMovies)
 	.get('/:id', getOneMovie)
 	.get('/character/:charactersid', getMovieByCharacter)
-	.post("/", verifyToken, createMovies)
+	.post("/", verifyToken, validatePostMovie, createMovies)
 	.put("/:id",verifyToken,  updateMovies)
 	.delete("/:id",verifyToken, deleteMovies)
 
